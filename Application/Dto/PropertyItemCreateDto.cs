@@ -3,25 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Domain.Entities;
 
-namespace Domain.Entities
+namespace Application.Dto
 {
-    public class Property
+    public class PropertyItemCreateDto
     {
-        public Property()
+        public PropertyItemCreateDto()
         {
             Images = new List<PropertyImage>();
             Traces = new List<PropertyTrace>();
         }
-
-        public string? Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Address { get; set; } = string.Empty;
-        public decimal Price { get; set; }        
+        public decimal Price { get; set; }
         public string CodeInternal { get; set; } = string.Empty;
         public int Year { get; set; }
-        public string CreationDate { get; set; } = string.Empty;
-        public string? UpdateDate { get; set; }
         public Owner Owner { get; set; }
         public List<PropertyImage> Images { get; set; }
         public List<PropertyTrace> Traces { get; set; }

@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 
-namespace Application.Dto
+namespace Domain.Entities
 {
-    public record PropertyItemDto
-    {      
-        public string? Id { get; set; }
+    public class Owner
+    {
         public required string IdOwner { get; set; }
         public required string Name { get; set; }
-        public required decimal Price { get; set; }
         public required string Address { get; set; }
-        public required string ImageUrl { get; set; }
+        public required string Photo { get; set; }
+        public DateTime? Birthday { get; set; }
     }
 }

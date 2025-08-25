@@ -1,83 +1,71 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Application.Dto;
+using Application.Interface;
+using Application.Services;
+using Domain.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 
 namespace MillionApi.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class PropertiesController : Controller
     {
-        // GET: PropertiesController
-        public ActionResult Index()
+
+        private readonly IPropertyService _propertyService;
+
+        public PropertiesController(IPropertyService propertyService)
         {
-            return View();
+            _propertyService = propertyService;
         }
 
-        // GET: PropertiesController/Details/5
-        public ActionResult Details(int id)
+        [HttpGet]
+        [Route("GetById")]
+        public async Task<IActionResult> GetById(string id, CancellationToken ct)
         {
-            return View();
+            try
+            {                
+                if (!ObjectId.TryParse(id, out var objectId))
+                {                   
+                    return NotFound();
+                }
+
+                var result = await _propertyService.GetByIdAsync(id, ct);
+
+                if (result != null)
+                    return Ok(result);
+
+                return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Ocurrió un error interno del servidor. {(ex.Message == null ? ex.InnerException : ex.Message)}");
+            }        
         }
 
-        // GET: PropertiesController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: PropertiesController/Create
+       
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        [Route("Create")]
+        public async Task<IActionResult> Create([FromBody] PropertyItemCreateDto dto, CancellationToken ct)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (dto == null)
+                {
+                    return BadRequest(400);
+                }
+
+                var result = await _propertyService.CreateAsync(dto, ct);
+
+                 return Ok(result);
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
-            }
+                return StatusCode(500, $"Ocurrió un error interno del servidor. {(ex.Message == null ? ex.InnerException : ex.Message)}");
+            }            
         }
 
-        // GET: PropertiesController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
 
-        // POST: PropertiesController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: PropertiesController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: PropertiesController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

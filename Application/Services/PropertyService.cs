@@ -5,39 +5,53 @@ using System.Text;
 using System.Threading.Tasks;
 using Application.Common;
 using Application.Dto;
+using Application.Interface;
+using AutoMapper;
 using Domain.Entities;
-using Domain.Interface;
+using Infraestructure.Interface;
 
 namespace Application.Services
 {
-    public class PropertyService
+    public class PropertyService : IPropertyService
     {
-       private readonly IPropertyInterface _iproperty;
+        private readonly IPropertyRepository _iproperty;
+        private readonly IMapper _mapper;
 
-        public PropertyService(IPropertyInterface propertyInterface) {
+        public PropertyService(IPropertyRepository propertyInterface, IMapper mapper ) {
             this._iproperty = propertyInterface;
+            this._mapper = mapper;
         }
 
-        public async Task<PaginationResult<Property>> SearchAsync(PropertyFilterDto filter, CancellationToken ct)
+        public async Task<PropertyDetailDto?> GetByIdAsync(string id, CancellationToken ct)
         {
-            return await _iproperty.SearchAsync(filter, ct);
+            var propertyDetailDto = new PropertyDetailDto();
+            var result = await _iproperty.GetByIdAsync(id, ct);
+
+            if (result != null)
+            {
+                propertyDetailDto.Address = result.Address ?? string.Empty;
+                propertyDetailDto.Name = result.Name ?? string.Empty;
+                propertyDetailDto.Price = result.Price;
+                //propertyDetailDto.Id = result.Id ?? string.Empty;
+               // propertyDetailDto.Image = result.Images?.FirstOrDefault()?.File ?? string.Empty;
+            }
+
+            return propertyDetailDto;
         }
-        public async Task<Property?> GetByIdAsync(string id, CancellationToken ct)
+        public async Task<bool> CreateAsync(PropertyItemCreateDto propertyDto, CancellationToken ct)
         {
-            return await _iproperty.GetByIdAsync(id, ct);
+            var propertyEntity = _mapper.Map<Property>(propertyDto);
+            return await _iproperty.CreateAsync(propertyEntity, ct);
         }
-        public async Task<string> CreateAsync(PropertyItemDto propertyDto, CancellationToken ct)
-        {
-            return await _iproperty.CreateAsync(Map.MapDataProperty(propertyDto), ct);
-        }
-        public async Task<bool> UpdatePropertyAsync(PropertyItemDto propertyDto, CancellationToken ct)
-        {
-            return await _iproperty.UpdateAsync(Map.MapDataProperty(propertyDto), ct);
-        }
-        public async Task<bool> DeletePropertyAsync(string id, CancellationToken ct)
-        {
-            return await _iproperty.DeleteAsync(id, ct);
-        }
+
+        //public async Task<bool> UpdatePropertyAsync(PropertyItemDto propertyDto, CancellationToken ct)
+        //{
+        //    return await _iproperty.UpdateAsync(Map.MapDataProperty(propertyDto), ct);
+        //}
+        //public async Task<bool> DeletePropertyAsync(string id, CancellationToken ct)
+        //{
+        //    return await _iproperty.DeleteAsync(id, ct);
+        //}
 
     }
 }

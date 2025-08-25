@@ -9,7 +9,7 @@ namespace Infraestructure.MongoDb
     public class MongoSettings
     {
         public string ConnectionString { get; set; } = default!;
-        public string Database { get; set; } = default!;
-        public string Collection { get; set; } = "Properties";
+        public string DatabaseName { get; set; } = default!;
+        public string CollectionName { get; set; } = "Properties";
     }
 }
