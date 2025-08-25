@@ -27,11 +27,11 @@ namespace Infraestructure.Common
                 UpdateDate = null,
                 Owner = new Owner
                 {
-                    IdOwner = dto.Owner.IdOwner,
-                    Name = dto.Owner.Name,
-                    Address = dto.Owner.Address,
-                    Photo = dto.Owner.Photo,
-                    Birthday = dto.Owner.Birthday
+                    IdOwner = (dto.Owner?.IdOwner),
+                    Name = dto.Owner?.Name,
+                    Address = dto.Owner?.Address,
+                    Photo = dto.Owner?.Photo,
+                    Birthday = dto.Owner?.Birthday
                 },
                 Images = dto.Images.Select(i => new PropertyImage
                 {

@@ -44,6 +44,20 @@ namespace Application.Services
             return await _iproperty.CreateAsync(propertyEntity, ct);
         }
 
+        public async Task<PaginationResult<PropertyItemDto>> GetPropertiesAsync(PropertyFilterDto filter, CancellationToken ct)
+        {
+            var (properties, totalCount) = await _iproperty.GetFilteredAsync(filter, ct);
+
+            return new PaginationResult<PropertyItemDto>
+            {
+                Items = properties.Select(_mapper.Map<PropertyItemDto>),
+                TotalCount = totalCount,
+                PageNumber = filter.PageNumber,
+                PageSize = filter.PageSize
+            };
+        }
+
+
         //public async Task<bool> UpdatePropertyAsync(PropertyItemDto propertyDto, CancellationToken ct)
         //{
         //    return await _iproperty.UpdateAsync(Map.MapDataProperty(propertyDto), ct);

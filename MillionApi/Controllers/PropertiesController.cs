@@ -44,7 +44,15 @@ namespace MillionApi.Controllers
             }        
         }
 
-       
+        [HttpGet]
+        [Route("GetAllByFilter")]
+        public async Task<IActionResult> GetAllByFilter([FromQuery] PropertyFilterDto filter, CancellationToken ct)
+        {
+            var result = await _propertyService.GetPropertiesAsync(filter, ct);
+            return Ok(result);
+        }
+
+
         [HttpPost]
         [Route("Create")]
         public async Task<IActionResult> Create([FromBody] PropertyItemCreateDto dto, CancellationToken ct)

@@ -14,6 +14,7 @@ namespace Application.Common
         public MappingProfile()
         {
             CreateMap<PropertyItemCreateDto, Property>();
+            CreateMap<Property, PropertyItemDto>();
             //CreateMap<OwnerDto, Owner>();
             //CreateMap<PropertyImageDto, PropertyImage>();
             //CreateMap<PropertyTraceDto, PropertyTrace>();

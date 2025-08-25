@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Application.Common;
 using Application.Dto;
 
 namespace Application.Interface
@@ -14,6 +15,9 @@ namespace Application.Interface
 
         // READ
         Task<PropertyDetailDto?> GetByIdAsync(string id, CancellationToken ct);
+
+        Task<PaginationResult<PropertyItemDto>> GetPropertiesAsync(PropertyFilterDto filter, CancellationToken ct);
+
         //Task<IEnumerable<PropertyListItemDto>> GetPropertiesAsync(PropertyFilterDto filter, CancellationToken ct);
 
         // UPDATE

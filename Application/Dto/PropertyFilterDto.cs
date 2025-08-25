@@ -12,9 +12,7 @@ namespace Application.Dto
         public decimal? MinPrice { get; set; }
         public decimal? MaxPrice { get; set; }
         public string? Address { get; set; }
-        public int Page { get; set; } = 1;
-        public int PageSize { get; set; } = 12; 
-        public string? SortBy { get; set; } = "price"; 
-        public string? SortDir { get; set; } = "asc"; 
+        public int PageNumber { get; set; } = 1;
+        public int PageSize { get; set; } = 10; 
     }
 }
