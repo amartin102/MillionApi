@@ -11,10 +11,10 @@ namespace Infraestructure.Interface
 {
     public interface IPropertyRepository
     {
-        Task <bool> CreateAsync(Property property, CancellationToken ct);
-        Task<Property?> GetByIdAsync(string id, CancellationToken ct);
+        Task <bool> CreateAsync(PropertyItemCreateDto dto, CancellationToken ct);
+        Task<PropertyDetailDto?> GetByIdAsync(string id, CancellationToken ct);
 
-        Task<(IEnumerable<Property> Properties, int TotalCount)> GetFilteredAsync(PropertyFilterDto filter, CancellationToken ct);
+        Task<(IEnumerable<PropertyItemDto> Properties, int TotalCount)> GetFilteredAsync(PropertyFilterDto filter, CancellationToken ct);
 
 
         //Task<IEnumerable<Property>> GetAllAsync(CancellationToken ct);

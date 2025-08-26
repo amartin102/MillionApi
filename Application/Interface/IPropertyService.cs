@@ -16,7 +16,7 @@ namespace Application.Interface
         // READ
         Task<PropertyDetailDto?> GetByIdAsync(string id, CancellationToken ct);
 
-        Task<PaginationResult<PropertyItemDto>> GetPropertiesAsync(PropertyFilterDto filter, CancellationToken ct);
+        Task<PaginationResult<PropertyItemDto>> GetAllPropertiesByFilter(PropertyFilterDto filter, CancellationToken ct);
 
         //Task<IEnumerable<PropertyListItemDto>> GetPropertiesAsync(PropertyFilterDto filter, CancellationToken ct);
 

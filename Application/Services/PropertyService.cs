@@ -23,28 +23,16 @@ namespace Application.Services
         }
 
         public async Task<PropertyDetailDto?> GetByIdAsync(string id, CancellationToken ct)
-        {
-            var propertyDetailDto = new PropertyDetailDto();
+        {           
             var result = await _iproperty.GetByIdAsync(id, ct);
-
-            if (result != null)
-            {
-                propertyDetailDto.Address = result.Address ?? string.Empty;
-                propertyDetailDto.Name = result.Name ?? string.Empty;
-                propertyDetailDto.Price = result.Price;
-                //propertyDetailDto.Id = result.Id ?? string.Empty;
-               // propertyDetailDto.Image = result.Images?.FirstOrDefault()?.File ?? string.Empty;
-            }
-
-            return propertyDetailDto;
+            return result;
         }
         public async Task<bool> CreateAsync(PropertyItemCreateDto propertyDto, CancellationToken ct)
-        {
-            var propertyEntity = _mapper.Map<Property>(propertyDto);
-            return await _iproperty.CreateAsync(propertyEntity, ct);
+        {            
+            return await _iproperty.CreateAsync(propertyDto, ct);
         }
 
-        public async Task<PaginationResult<PropertyItemDto>> GetPropertiesAsync(PropertyFilterDto filter, CancellationToken ct)
+        public async Task<PaginationResult<PropertyItemDto>> GetAllPropertiesByFilter(PropertyFilterDto filter, CancellationToken ct)
         {
             var (properties, totalCount) = await _iproperty.GetFilteredAsync(filter, ct);
 
@@ -57,15 +45,6 @@ namespace Application.Services
             };
         }
 
-
-        //public async Task<bool> UpdatePropertyAsync(PropertyItemDto propertyDto, CancellationToken ct)
-        //{
-        //    return await _iproperty.UpdateAsync(Map.MapDataProperty(propertyDto), ct);
-        //}
-        //public async Task<bool> DeletePropertyAsync(string id, CancellationToken ct)
-        //{
-        //    return await _iproperty.DeleteAsync(id, ct);
-        //}
 
     }
 }

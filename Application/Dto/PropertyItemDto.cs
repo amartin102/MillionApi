@@ -10,10 +10,12 @@ namespace Application.Dto
     public record PropertyItemDto
     {      
         public string? Id { get; set; }
-        public required string IdOwner { get; set; }
-        public required string Name { get; set; }
-        public required decimal Price { get; set; }
-        public required string Address { get; set; }
-        public required string ImageUrl { get; set; }
+        public string IdOwner { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
+        public decimal Price { get; set; } 
+        public string Address { get; set; } = string.Empty;
+        public string Image { get; set; } = string.Empty;
+        public int Year { get; set; }
+
     }
 }

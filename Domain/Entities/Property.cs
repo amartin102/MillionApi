@@ -10,7 +10,6 @@ namespace Domain.Entities
     {
         public Property()
         {
-            Images = new List<PropertyImage>();
             Traces = new List<PropertyTrace>();
         }
 
@@ -23,7 +22,7 @@ namespace Domain.Entities
         public string CreationDate { get; set; } = string.Empty;
         public string? UpdateDate { get; set; }
         public Owner Owner { get; set; }
-        public List<PropertyImage> Images { get; set; }
+        public PropertyImage Images { get; set; }
         public List<PropertyTrace> Traces { get; set; }
     }
 }

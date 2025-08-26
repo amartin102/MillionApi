@@ -9,18 +9,25 @@ namespace Application.Dto
 {
     public class PropertyItemCreateDto
     {
-        public PropertyItemCreateDto()
-        {
-            Images = new List<PropertyImage>();
-            Traces = new List<PropertyTrace>();
-        }
         public string Name { get; set; } = string.Empty;
         public string Address { get; set; } = string.Empty;
         public decimal Price { get; set; }
         public string CodeInternal { get; set; } = string.Empty;
         public int Year { get; set; }
-        public Owner Owner { get; set; }
-        public List<PropertyImage> Images { get; set; }
-        public List<PropertyTrace> Traces { get; set; }
+
+        //Owner details
+        public string OwnerName { get; set; } = string.Empty;
+        public string OwnerAddress { get; set; } = string.Empty;
+        public string OwnerPhoto { get; set; } = string.Empty;
+        public DateTime? Birthday { get; set; }
+
+        //Image details
+        public required string PropertyFile { get; set; }
+
+        //Trace details
+        public DateTime? DateSale { get; set; }
+        public string? TraceName { get; set; }
+        public decimal? Value { get; set; }
+        public decimal? Tax { get; set; }
     }
 }

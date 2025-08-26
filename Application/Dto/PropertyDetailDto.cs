@@ -11,8 +11,9 @@ namespace Application.Dto
         public string Id { get; set; } = string.Empty;      // Id de la propiedad
         public string IdOwner { get; set; } = string.Empty; // Id del dueño
         public string Name { get; set; } = string.Empty;    // Nombre de la propiedad
-        public string Address { get; set; } = string.Empty; // Dirección
+        public string Address { get; set; } = string.Empty; // Dirección de la propiedad
         public decimal Price { get; set; }                  // Precio
-        public string Image { get; set; } = string.Empty;   // Imagen principal (URL o base64)
+        public string Image { get; set; } = string.Empty;   // Imagen de la propiedad (URL o base64)
+        public int Year { get; set; }
     }
 }

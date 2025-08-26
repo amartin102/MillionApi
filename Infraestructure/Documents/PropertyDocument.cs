@@ -24,7 +24,7 @@ namespace Infraestructure.Documents
         public DateTime? UpdateDate { get; set; }
 
         public OwnerDocument Owner { get; set; } = new();
-        public List<PropertyImageDocument> Images { get; set; } = new();
-        public List<PropertyTraceDocument> Traces { get; set; } = new();
+        public PropertyImageDocument Images { get; set; } = new();
+        public PropertyTraceDocument Traces { get; set; } = new();
     }
 }
