@@ -69,7 +69,8 @@ namespace Infraestructure.Common
                 Price = dto.Price,
                 IdOwner = dto.Owner.IdOwner,
                 Image = dto.Images?.File ?? string.Empty,
-                Year = dto.Year
+                Year = dto.Year,
+                OwnerName = dto.Owner.Name
 
             };
         }

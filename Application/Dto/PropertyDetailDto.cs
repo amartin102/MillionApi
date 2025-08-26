@@ -15,5 +15,7 @@ namespace Application.Dto
         public decimal Price { get; set; }                  // Precio
         public string Image { get; set; } = string.Empty;   // Imagen de la propiedad (URL o base64)
         public int Year { get; set; }
+        public string OwnerName { get; set; } //Nombre del propietario
+
     }
 }
