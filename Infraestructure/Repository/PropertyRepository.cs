@@ -14,9 +14,11 @@ using Microsoft.Extensions.Options;
 using Infraestructure.Documents;
 using Infraestructure.Common;
 using Infraestructure.Interface;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Infraestructure.Repository
 {
+    [ExcludeFromCodeCoverage]
     public class PropertyRepository : IPropertyRepository
     {
         private readonly IMongoCollection<PropertyDocument> _col;

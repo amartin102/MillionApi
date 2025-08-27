@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Common
+namespace Infraestructure.Common
 {
     public class PaginationResult<T>(IReadOnlyList<T> items, int Page, int PageSize, long Total);
     
